@@ -8070,8 +8070,8 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		gen: 8,
 		isNonstandard: "CAP",
 	},
-	energizedterashard: {
-		name: "Energized Tera Shard",
+	spentterashard: {
+		name: "Spent Tera Shard",
 		spritenum: 307,
 		fling: {
 			basePower: 100,
