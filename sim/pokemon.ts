@@ -497,7 +497,11 @@ export class Pokemon {
 		this.baseMaxhp = 0;
 		this.hp = 0;
 		this.clearVolatile();
-		this.hp = this.maxhp;
+		this.hp = Math.floor(this.maxhp * (this.set.initialHp) / 100);
+		if (this.set.nonVolatileInitial)
+		{
+			this.status = this.battle.dex.conditions.get(this.set.nonVolatileInitial).id;
+		}
 	}
 
 	toJSON(): AnyObject {
