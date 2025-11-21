@@ -8083,7 +8083,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		name: "Blank Disk",
 		spritenum: 734,
 		fling: {
-			basePower: 80,
+			basePower: 150,
 		},
 		num: -4,
 		gen: 9,
