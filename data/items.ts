@@ -8092,7 +8092,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		name: "Spent Mint",
 		spritenum: 535,
 		fling: {
-			basePower: 60,
+			basePower: 100,
 		},
 		num: -5,
 		gen: 9,
