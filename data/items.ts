@@ -8074,7 +8074,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		name: "Spent Tera Shard",
 		spritenum: 307,
 		fling: {
-			basePower: 100,
+			basePower: 80,
 		},
 		num: -3,
 		gen: 9,
@@ -8092,9 +8092,18 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		name: "Spent Mint",
 		spritenum: 535,
 		fling: {
-			basePower: 100,
+			basePower: 80,
 		},
 		num: -5,
 		gen: 9,
 	},
+	amuletcoin: {
+		name: "Amulet Coin",
+		spritenum: 747,
+		fling: {
+			basePower: 80,
+		},
+		num: -6,
+		gen: 9,
+	}
 };
