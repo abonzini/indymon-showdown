@@ -43,7 +43,7 @@ export interface PokemonSet {
 	 * These should always be converted to ids before use.
 	 */
 	moves: string[];
-	moveUses: number[]; // INDYMON, registers how many times a move has been used
+	movesPp: number[]; // INDYMON, registers how many times a move has been used
 	/**
 	 * This can be an id, e.g. "adamant" or a full name, e.g. "Adamant".
 	 * This should always be converted to an id before use.
@@ -147,7 +147,7 @@ export const Teams = new class Teams {
 			// moves
 			buf += '|' + set.moves.map((m, i) => {
 				const name = this.packName(m);
-				const uses = set.moveUses[i] || 0;
+				const uses = set.movesPp[i] || 1000; // Default is a huge number idc, will be clamped
 				return uses ? name + '#' + uses : name;
 			}).join(',');
 
@@ -275,11 +275,11 @@ export const Teams = new class Teams {
 			// new indymon way of also capturing number of uses too
 			const moveParts = buf.substring(i, j).split(',', 24);
 			set.moves = [];
-			set.moveUses = [];
+			set.movesPp = [];
 			for (const part of moveParts) {
 				const [rawName, usesStr] = part.split('#');
 				set.moves.push(this.unpackName(rawName, Dex.moves));
-				set.moveUses.push(usesStr ? parseInt(usesStr) : 0);
+				set.movesPp.push(usesStr ? parseInt(usesStr) : 1000); // Default is huge number idc will be clamped
 			}			
 			i = j + 1;
 
