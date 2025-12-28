@@ -94,6 +94,16 @@ export class Field {
 		this.battle.singleEvent('FieldEnd', prevWeather, this.weatherState, this);
 		this.weather = '';
 		this.battle.clearEffectState(this.weatherState);
+
+		// Restore hail
+		if (this.battle.ruleTable.has('continuoushailmod')) {
+			const hail = this.battle.dex.conditions.get('continuoushail');
+			this.weather = hail.id;
+			this.weatherState = this.battle.initEffectState({id: hail.id});
+			this.battle.singleEvent('FieldStart', hail, this.weatherState, this);
+			return true;
+		}
+
 		this.battle.eachEvent('WeatherChange');
 		return true;
 	}

@@ -2639,6 +2639,11 @@ export class Battle {
 
 			this.add('start');
 
+			// Initialize hail if custom mod
+			if (this.ruleTable.has('continuoushailmod')) {
+				this.field.setWeather('continuoushail');
+			}
+
 			// Change Zacian/Zamazenta into their Crowned formes
 			for (const pokemon of this.getAllPokemon()) {
 				let rawSpecies: Species | null = null;

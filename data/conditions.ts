@@ -693,6 +693,26 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			this.add('-weather', 'none');
 		},
 	},
+	continuoushail: {
+		name: 'Continuous Hail',
+		effectType: 'Weather',
+		duration: 0,
+		onFieldStart(field, source, effect) {
+			this.add('-weather', 'Hail');
+		},
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
+			this.add('-weather', 'Hail', '[upkeep]');
+			if (this.field.isWeather('continuoushail')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			if (target.hasType('Ice')) return;
+			this.damage(target.baseMaxhp / 16);
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 	snowscape: {
 		name: 'Snowscape',
 		effectType: 'Weather',

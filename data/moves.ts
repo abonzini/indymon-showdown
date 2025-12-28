@@ -866,7 +866,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { snatch: 1, metronome: 1 },
 		sideCondition: 'auroraveil',
 		onTry() {
-			return this.field.isWeather(['hail', 'snowscape']);
+			return this.field.isWeather(['continuoushail', 'hail', 'snowscape']);
 		},
 		condition: {
 			duration: 5,
@@ -1548,7 +1548,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1, wind: 1 },
 		onModifyMove(move) {
-			if (this.field.isWeather(['hail', 'snowscape'])) move.accuracy = true;
+			if (this.field.isWeather(['continuoushail', 'hail', 'snowscape'])) move.accuracy = true;
 		},
 		secondary: {
 			chance: 10,
@@ -3734,7 +3734,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		condition: {
 			duration: 2,
 			onImmunity(type, pokemon) {
-				if (type === 'sandstorm' || type === 'hail') return false;
+				if (type === 'sandstorm' || type === 'hail' || type === 'continuoushail') return false;
 			},
 			onInvulnerability(target, source, move) {
 				if (['earthquake', 'magnitude'].includes(move.id)) {
@@ -3909,7 +3909,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		condition: {
 			duration: 2,
 			onImmunity(type, pokemon) {
-				if (type === 'sandstorm' || type === 'hail') return false;
+				if (type === 'sandstorm' || type === 'hail' || type === 'continuoushail') return false;
 			},
 			onInvulnerability(target, source, move) {
 				if (['surf', 'whirlpool'].includes(move.id)) {
@@ -12710,6 +12710,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			case 'sandstorm':
 			case 'hail':
 			case 'snowscape':
+			case 'continuoushail':
 				factor = 0.25;
 				break;
 			}
@@ -12747,6 +12748,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			case 'sandstorm':
 			case 'hail':
 			case 'snowscape':
+			case 'continuoushail':
 				factor = 0.25;
 				break;
 			}
@@ -17908,7 +17910,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			return null;
 		},
 		onBasePower(basePower, pokemon, target) {
-			const weakWeathers = ['raindance', 'primordialsea', 'sandstorm', 'hail', 'snowscape'];
+			const weakWeathers = ['raindance', 'primordialsea', 'sandstorm', 'hail', 'continuoushail', 'snowscape'];
 			if (weakWeathers.includes(pokemon.effectiveWeather())) {
 				this.debug('weakened by weather');
 				return this.chainModify(0.5);
@@ -17945,7 +17947,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			return null;
 		},
 		onBasePower(basePower, pokemon, target) {
-			const weakWeathers = ['raindance', 'primordialsea', 'sandstorm', 'hail', 'snowscape'];
+			const weakWeathers = ['raindance', 'primordialsea', 'sandstorm', 'hail', 'continuoushail', 'snowscape'];
 			if (weakWeathers.includes(pokemon.effectiveWeather())) {
 				this.debug('weakened by weather');
 				return this.chainModify(0.5);
@@ -19469,6 +19471,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			case 'sandstorm':
 			case 'hail':
 			case 'snowscape':
+			case 'continuoushail':
 				factor = 0.25;
 				break;
 			}
@@ -21513,6 +21516,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				break;
 			case 'hail':
 			case 'snowscape':
+			case 'continuoushail':
 				move.type = 'Ice';
 				break;
 			}
@@ -21532,6 +21536,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				break;
 			case 'hail':
 			case 'snowscape':
+			case 'continuoushail':
 				move.basePower *= 2;
 				break;
 			}

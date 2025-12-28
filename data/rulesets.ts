@@ -3243,4 +3243,10 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			if (!speciesMods.length) throw new Error('This format has no rules that modify base stats.');
 		},
 	},
+	continuoushailmod: {
+		effectType: 'Rule',
+		name: "Continuous Hail Mod",
+		desc: `There's always hail. Weather can override it but then it returns to hail.`,
+		// implemented in Field.ts
+	},
 };
