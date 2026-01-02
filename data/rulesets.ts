@@ -3249,4 +3249,10 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		desc: `There's always hail. Weather can override it but then it returns to hail.`,
 		// implemented in Field.ts
 	},
+	continuousdesolatelandmod: {
+		effectType: 'Rule',
+		name: "Continuous Desolate Land Mod",
+		desc: `There's always desolate land. Weather can override it (???) but then it returns to desolate land.`,
+		// implemented in Field.ts
+	},
 };

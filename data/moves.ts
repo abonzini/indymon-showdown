@@ -8146,7 +8146,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { snatch: 1, metronome: 1 },
 		onModifyMove(move, pokemon) {
-			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) move.boosts = { atk: 2, spa: 2 };
+			if (['sunnyday', 'desolateland', 'continuousdesolateland'].includes(pokemon.effectiveWeather())) move.boosts = { atk: 2, spa: 2 };
 		},
 		boosts: {
 			atk: 1,
@@ -9369,6 +9369,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				break;
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				move.accuracy = 50;
 				break;
 			}
@@ -12701,6 +12702,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			switch (pokemon.effectiveWeather()) {
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				factor = 0.667;
 				break;
 			case 'raindance':
@@ -12739,6 +12741,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			switch (pokemon.effectiveWeather()) {
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				factor = 0.667;
 				break;
 			case 'raindance':
@@ -17896,7 +17899,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name);
-			if (['sunnyday', 'desolateland'].includes(attacker.effectiveWeather())) {
+			if (['sunnyday', 'desolateland','continuousdesolateland'].includes(attacker.effectiveWeather())) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
 				return;
@@ -17933,7 +17936,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name);
-			if (['sunnyday', 'desolateland'].includes(attacker.effectiveWeather())) {
+			if (['sunnyday', 'desolateland', 'continuousdesolateland'].includes(attacker.effectiveWeather())) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
 				return;
@@ -19462,6 +19465,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			switch (pokemon.effectiveWeather()) {
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				factor = 0.667;
 				break;
 			case 'raindance':
@@ -20205,6 +20209,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				break;
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				move.accuracy = 50;
 				break;
 			}
@@ -21503,6 +21508,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			switch (pokemon.effectiveWeather()) {
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				move.type = 'Fire';
 				break;
 			case 'raindance':
@@ -21523,6 +21529,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			switch (pokemon.effectiveWeather()) {
 			case 'sunnyday':
 			case 'desolateland':
+			case 'continuousdesolateland':
 				move.basePower *= 2;
 				break;
 			case 'raindance':

@@ -103,6 +103,13 @@ export class Field {
 			this.battle.singleEvent('FieldStart', hail, this.weatherState, this);
 			return true;
 		}
+		else if (this.battle.ruleTable.has('continuousdesolatelandmod')) {
+			const dland = this.battle.dex.conditions.get('continuousdesolateland');
+			this.weather = dland.id;
+			this.weatherState = this.battle.initEffectState({id: dland.id});
+			this.battle.singleEvent('FieldStart', dland, this.weatherState, this);
+			return true;
+		}
 
 		this.battle.eachEvent('WeatherChange');
 		return true;
