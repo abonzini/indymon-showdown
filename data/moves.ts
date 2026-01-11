@@ -1522,7 +1522,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1, wind: 1 },
 		onModifyMove(move, pokemon, target) {
-			if (target && ['raindance', 'primordialsea', 'continuousprimordialsea'].includes(target.effectiveWeather())) {
+			if (target && ['raindance', 'continuousrain', 'primordialsea', 'continuousprimordialsea'].includes(target.effectiveWeather())) {
 				move.accuracy = true;
 			}
 		},
@@ -4809,7 +4809,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			}
 			this.add('-prepare', attacker, move.name);
 			this.boost({ spa: 1 }, attacker, attacker, move);
-			if (['raindance', 'primordialsea', 'continuousprimordialsea'].includes(attacker.effectiveWeather())) {
+			if (['raindance', 'continuousrain', 'primordialsea', 'continuousprimordialsea'].includes(attacker.effectiveWeather())) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
 				return;
@@ -9364,6 +9364,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		onModifyMove(move, pokemon, target) {
 			switch (target?.effectiveWeather()) {
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 				move.accuracy = true;
@@ -12707,6 +12708,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				factor = 0.667;
 				break;
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 			case 'sandstorm':
@@ -12747,6 +12749,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				factor = 0.667;
 				break;
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 			case 'sandstorm':
@@ -16273,7 +16276,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1, wind: 1 },
 		onModifyMove(move, pokemon, target) {
-			if (target && ['raindance', 'primordialsea', 'continuousprimordialsea'].includes(target.effectiveWeather())) {
+			if (target && ['raindance', 'continuousrain', 'primordialsea', 'continuousprimordialsea'].includes(target.effectiveWeather())) {
 				move.accuracy = true;
 			}
 		},
@@ -17914,7 +17917,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			return null;
 		},
 		onBasePower(basePower, pokemon, target) {
-			const weakWeathers = ['raindance', 'primordialsea', 'continuousprimordialsea', 'sandstorm', 'hail', 'continuoushail', 'snowscape'];
+			const weakWeathers = ['raindance', 'continuousrain', 'primordialsea', 'continuousprimordialsea', 'sandstorm', 'hail', 'continuoushail', 'snowscape'];
 			if (weakWeathers.includes(pokemon.effectiveWeather())) {
 				this.debug('weakened by weather');
 				return this.chainModify(0.5);
@@ -17951,7 +17954,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			return null;
 		},
 		onBasePower(basePower, pokemon, target) {
-			const weakWeathers = ['raindance', 'primordialsea', 'continuousprimordialsea', 'sandstorm', 'hail', 'continuoushail', 'snowscape'];
+			const weakWeathers = ['raindance', 'continuousrain', 'primordialsea', 'continuousprimordialsea', 'sandstorm', 'hail', 'continuoushail', 'snowscape'];
 			if (weakWeathers.includes(pokemon.effectiveWeather())) {
 				this.debug('weakened by weather');
 				return this.chainModify(0.5);
@@ -19472,6 +19475,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				factor = 0.667;
 				break;
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 			case 'sandstorm':
@@ -20208,6 +20212,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		onModifyMove(move, pokemon, target) {
 			switch (target?.effectiveWeather()) {
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 				move.accuracy = true;
@@ -21517,6 +21522,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				move.type = 'Fire';
 				break;
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 				move.type = 'Water';
@@ -21539,6 +21545,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				move.basePower *= 2;
 				break;
 			case 'raindance':
+			case 'continuousrain':
 			case 'primordialsea':
 			case 'continuousprimordialsea':
 				move.basePower *= 2;
@@ -21685,7 +21692,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1, wind: 1 },
 		onModifyMove(move, pokemon, target) {
-			if (target && ['raindance', 'primordialsea', 'continuousprimordialsea'].includes(target.effectiveWeather())) {
+			if (target && ['raindance', 'continuousrain', 'primordialsea', 'continuousprimordialsea'].includes(target.effectiveWeather())) {
 				move.accuracy = true;
 			}
 		},
@@ -22143,5 +22150,40 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "allAdjacentFoes",
 		type: "Fire",
 		contestType: "Beautiful",
+	},
+	continuoustrickroom: {
+		num: -4,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Trick Room",
+		pp: 5,
+		priority: -7,
+		flags: { mirror: 1, metronome: 1 },
+		pseudoWeather: 'trickroom',
+		condition: {
+			duration: 0,
+			onFieldStart(target, source) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-fieldstart', 'move: Trick Room', `[of] ${source}`, '[persistent]');
+				} else {
+					this.add('-fieldstart', 'move: Trick Room', `[of] ${source}`);
+				}
+			},
+			onFieldRestart(target, source) {
+				this.field.removePseudoWeather('trickroom');
+			},
+			// Speed modification is changed in Pokemon.getActionSpeed() in sim/pokemon.js
+			onFieldResidualOrder: 27,
+			onFieldResidualSubOrder: 1,
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Trick Room');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Psychic",
+		zMove: { boost: { accuracy: 1 } },
+		contestType: "Clever",
 	},
 };
