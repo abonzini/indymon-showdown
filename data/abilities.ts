@@ -924,7 +924,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			this.field.setWeather('deltastream');
 		},
 		onAnySetWeather(target, source, weather) {
-			const strongWeathers = ['desolateland', 'primordialsea', 'deltastream', 'continuousdesolateland'];
+			const strongWeathers = ['desolateland', 'primordialsea', 'continuousprimordialsea', 'deltastream', 'continuousdesolateland'];
 			if (this.field.getWeather().id === 'deltastream' && !strongWeathers.includes(weather.id)) return false;
 		},
 		onEnd(pokemon) {
@@ -948,7 +948,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			this.field.setWeather('desolateland');
 		},
 		onAnySetWeather(target, source, weather) {
-			const strongWeathers = ['desolateland', 'primordialsea', 'deltastream', 'continuousdesolateland'];
+			const strongWeathers = ['desolateland', 'primordialsea', 'continuousprimordialsea', 'deltastream', 'continuousdesolateland'];
 			if ((this.field.getWeather().id === 'desolateland' || this.field.getWeather().id === 'continuousdesolateland') && !strongWeathers.includes(weather.id)) return false;
 		},
 		onEnd(pokemon) {
@@ -1090,7 +1090,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		},
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
-			if (effect.id === 'raindance' || effect.id === 'primordialsea') {
+			if (effect.id === 'raindance' || effect.id === 'primordialsea' || effect.id === 'continuousprimordialsea') {
 				this.heal(target.baseMaxhp / 8);
 			} else if (effect.id === 'sunnyday' || effect.id === 'desolateland' || effect.id === 'continuousdesolateland') {
 				this.damage(target.baseMaxhp / 8, target, target);
@@ -1426,6 +1426,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				break;
 			case 'raindance':
 			case 'primordialsea':
+			case 'continuousprimordialsea':
 				if (pokemon.species.id !== 'castformrainy') forme = 'Castform-Rainy';
 				break;
 			case 'hail':
@@ -1871,7 +1872,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		onResidualOrder: 5,
 		onResidualSubOrder: 3,
 		onResidual(pokemon) {
-			if (pokemon.status && ['raindance', 'primordialsea'].includes(pokemon.effectiveWeather())) {
+			if (pokemon.status && ['raindance', 'primordialsea', 'continuousprimordialsea'].includes(pokemon.effectiveWeather())) {
 				this.debug('hydration');
 				this.add('-activate', pokemon, 'ability: Hydration');
 				pokemon.cureStatus();
@@ -2844,7 +2845,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		onSwitchIn(pokemon) {
 			this.add('-ability', pokemon, 'Neutralizing Gas');
 			pokemon.abilityState.ending = false;
-			const strongWeathers = ['desolateland', 'continuousdesolateland', 'primordialsea', 'deltastream'];
+			const strongWeathers = ['desolateland', 'continuousdesolateland', 'primordialsea', 'continuousprimordialsea', 'deltastream'];
 			for (const target of this.getAllActive()) {
 				if (target.hasItem('Ability Shield')) {
 					this.add('-block', target, 'item: Ability Shield');
@@ -3374,7 +3375,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			this.field.setWeather('primordialsea');
 		},
 		onAnySetWeather(target, source, weather) {
-			const strongWeathers = ['desolateland', 'continuousdesolateland', 'primordialsea', 'deltastream'];
+			const strongWeathers = ['desolateland', 'continuousdesolateland', 'primordialsea', 'continuousprimordialsea', 'deltastream'];
 			if (this.field.getWeather().id === 'primordialsea' && !strongWeathers.includes(weather.id)) return false;
 		},
 		onEnd(pokemon) {
@@ -3681,7 +3682,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	raindish: {
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
-			if (effect.id === 'raindance' || effect.id === 'primordialsea') {
+			if (effect.id === 'raindance' || effect.id === 'primordialsea' || effect.id === 'continuousprimordialsea') {
 				this.heal(target.baseMaxhp / 16);
 			}
 		},
@@ -4715,7 +4716,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	swiftswim: {
 		onModifySpe(spe, pokemon) {
-			if (['raindance', 'primordialsea'].includes(pokemon.effectiveWeather())) {
+			if (['raindance', 'primordialsea', 'continuousprimordialsea'].includes(pokemon.effectiveWeather())) {
 				return this.chainModify(2);
 			}
 		},

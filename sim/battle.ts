@@ -2647,6 +2647,10 @@ export class Battle {
 			{
 				this.field.setWeather('continuousdesolateland');
 			}
+			else if (this.ruleTable.has('continuousprimordialseamod'))
+			{
+				this.field.setWeather('continuousprimordialsea');
+			}
 
 			// Change Zacian/Zamazenta into their Crowned formes
 			for (const pokemon of this.getAllPokemon()) {

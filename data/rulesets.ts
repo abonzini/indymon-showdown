@@ -3255,4 +3255,10 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		desc: `There's always desolate land. Weather can override it (???) but then it returns to desolate land.`,
 		// implemented in Field.ts
 	},
+	continuousprimordialseamod: {
+		effectType: 'Rule',
+		name: "Continuous Primordial Sea Mod",
+		desc: `There's always primordial sea. Weather can override it (???) but then it returns to primordial sea.`,
+		// implemented in Field.ts
+	},
 };
