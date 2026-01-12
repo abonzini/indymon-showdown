@@ -1432,6 +1432,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				break;
 			case 'hail':
 			case 'snowscape':
+			case 'continuoussnow':
 			case 'continuoushail':
 				if (pokemon.species.id !== 'castformsnowy') forme = 'Castform-Snowy';
 				break;
@@ -1901,7 +1902,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	icebody: {
 		onWeather(target, source, effect) {
-			if (effect.id === 'hail' || effect.id === 'snowscape' || effect.id === 'continuoushail') {
+			if (effect.id === 'hail' || effect.id === 'snowscape' || effect.id === 'continuoussnow' || effect.id === 'continuoushail') {
 				this.heal(target.baseMaxhp / 16);
 			}
 		},
@@ -1916,7 +1917,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	iceface: {
 		onSwitchInPriority: -2,
 		onStart(pokemon) {
-			if (this.field.isWeather(['continuoushail','hail', 'snowscape']) && pokemon.species.id === 'eiscuenoice') {
+			if (this.field.isWeather(['continuoushail','hail', , 'continuoussnow']) && pokemon.species.id === 'eiscuenoice') {
 				this.add('-activate', pokemon, 'ability: Ice Face');
 				this.effectState.busted = false;
 				pokemon.formeChange('Eiscue', this.effect, true);
@@ -1956,7 +1957,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			// snow/hail resuming because Cloud Nine/Air Lock ended does not trigger Ice Face
 			if ((sourceEffect as Ability)?.suppressWeather) return;
 			if (!pokemon.hp) return;
-			if (this.field.isWeather(['continuoushail','hail', 'snowscape']) && pokemon.species.id === 'eiscuenoice') {
+			if (this.field.isWeather(['continuoushail','hail', 'snowscape', 'continuoussnow']) && pokemon.species.id === 'eiscuenoice') {
 				this.add('-activate', pokemon, 'ability: Ice Face');
 				this.effectState.busted = false;
 				pokemon.formeChange('Eiscue', this.effect, true);
@@ -4266,7 +4267,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	slushrush: {
 		onModifySpe(spe, pokemon) {
-			if (this.field.isWeather(['continuoushail', 'hail', 'snowscape'])) {
+			if (this.field.isWeather(['continuoushail', 'hail', 'snowscape', 'continuoussnow'])) {
 				return this.chainModify(2);
 			}
 		},
@@ -4294,7 +4295,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		onModifyAccuracyPriority: -1,
 		onModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
-			if (this.field.isWeather(['continuoushail', 'hail', 'snowscape'])) {
+			if (this.field.isWeather(['continuoushail', 'hail', 'snowscape', 'continuoussnow'])) {
 				this.debug('Snow Cloak - decreasing accuracy');
 				return this.chainModify([3277, 4096]);
 			}

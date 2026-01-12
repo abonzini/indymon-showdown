@@ -841,6 +841,28 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			this.add('-weather', 'none');
 		},
 	},
+	continuoussnow: {
+		name: 'Constinuous Snow',
+		effectType: 'Weather',
+		duration: 0,
+		onModifyDefPriority: 10,
+		onModifyDef(def, pokemon) {
+			if (pokemon.hasType('Ice') && this.field.isWeather('snowscape')) {
+				return this.modify(def, 1.5);
+			}
+		},
+		onFieldStart(field, source, effect) {
+			this.add('-weather', 'Snowscape');
+		},
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
+			this.add('-weather', 'Snowscape', '[upkeep]');
+			if (this.field.isWeather('snowscape')) this.eachEvent('Weather');
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 	deltastream: {
 		name: 'DeltaStream',
 		effectType: 'Weather',
