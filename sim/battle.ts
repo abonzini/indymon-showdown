@@ -2643,25 +2643,29 @@ export class Battle {
 			if (this.ruleTable.has('continuoushailmod')) {
 				this.field.setWeather('continuoushail');
 			}
-			else if (this.ruleTable.has('continuousdesolatelandmod'))
+			if (this.ruleTable.has('continuousdesolatelandmod'))
 			{
 				this.field.setWeather('continuousdesolateland');
 			}
-			else if (this.ruleTable.has('continuousprimordialseamod'))
+			if (this.ruleTable.has('continuousprimordialseamod'))
 			{
 				this.field.setWeather('continuousprimordialsea');
 			}
-			else if (this.ruleTable.has('continuoustrickroommod'))
+			if (this.ruleTable.has('continuoustrickroommod'))
 			{
 				this.field.addPseudoWeather('continuoustrickroom');
 			}
-			else if (this.ruleTable.has('continuousrainmod'))
+			if (this.ruleTable.has('continuousrainmod'))
 			{
 				this.field.setWeather('continuousrain');
 			}
-			else if (this.ruleTable.has('continuoussnowmod'))
+			if (this.ruleTable.has('continuoussnowmod'))
 			{
 				this.field.setWeather('continuoussnow');
+			}
+			if (this.ruleTable.has('continuouselectricterrainmod'))
+			{
+				this.field.setTerrain('continuouselectricterrain');
 			}
 
 			// Change Zacian/Zamazenta into their Crowned formes

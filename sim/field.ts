@@ -103,28 +103,28 @@ export class Field {
 			this.battle.singleEvent('FieldStart', hail, this.weatherState, this);
 			return true;
 		}
-		else if (this.battle.ruleTable.has('continuousdesolatelandmod')) {
+		if (this.battle.ruleTable.has('continuousdesolatelandmod')) {
 			const dland = this.battle.dex.conditions.get('continuousdesolateland');
 			this.weather = dland.id;
 			this.weatherState = this.battle.initEffectState({id: dland.id});
 			this.battle.singleEvent('FieldStart', dland, this.weatherState, this);
 			return true;
 		}
-		else if (this.battle.ruleTable.has('continuousprimordialseamod')) {
+		if (this.battle.ruleTable.has('continuousprimordialseamod')) {
 			const psea = this.battle.dex.conditions.get('continuousprimordialsea');
 			this.weather = psea.id;
 			this.weatherState = this.battle.initEffectState({id: psea.id});
 			this.battle.singleEvent('FieldStart', psea, this.weatherState, this);
 			return true;
 		}
-		else if (this.battle.ruleTable.has('continuousrainmod')) {
+		if (this.battle.ruleTable.has('continuousrainmod')) {
 			const psea = this.battle.dex.conditions.get('continuousrain');
 			this.weather = psea.id;
 			this.weatherState = this.battle.initEffectState({id: psea.id});
 			this.battle.singleEvent('FieldStart', psea, this.weatherState, this);
 			return true;
 		}
-		else if (this.battle.ruleTable.has('continuoussnowmod')) {
+		if (this.battle.ruleTable.has('continuoussnowmod')) {
 			const psea = this.battle.dex.conditions.get('continuoussnow');
 			this.weather = psea.id;
 			this.weatherState = this.battle.initEffectState({id: psea.id});
@@ -170,19 +170,21 @@ export class Field {
 		if (!sourceEffect && this.battle.effect) sourceEffect = this.battle.effect;
 		if (!source && this.battle.event?.target) source = this.battle.event.target;
 		if (source === 'debug') source = this.battle.sides[0].active[0];
-		if (!source) throw new Error(`setting terrain without a source`);
 
 		if (this.terrain === status.id) return false;
 		const prevTerrain = this.terrain;
 		const prevTerrainState = this.terrainState;
 		this.terrain = status.id;
-		this.terrainState = this.battle.initEffectState({
-			id: status.id,
-			source,
-			sourceSlot: source.getSlot(),
-			duration: status.duration,
-		});
+		this.terrainState = this.battle.initEffectState({ id: status.id });
+		if (source) {
+			this.terrainState.source = source;
+			this.terrainState.sourceSlot = source.getSlot();
+		}
+		if (status.duration) {
+			this.terrainState.duration = status.duration;
+		}
 		if (status.durationCallback) {
+			if (!source) throw new Error(`setting terrain without a source`);
 			this.terrainState.duration = status.durationCallback.call(this.battle, source, source, sourceEffect);
 		}
 		if (!this.battle.singleEvent('FieldStart', status, this.terrainState, this, source, sourceEffect)) {

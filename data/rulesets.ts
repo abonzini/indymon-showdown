@@ -3273,4 +3273,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		name: "Continuous Snow Mod",
 		desc: `There's always snow. Weather can override it but then it returns to snow.`,
 	},
+	continuouselectricterrainmod: {
+		effectType: 'Rule',
+		name: "Continuous Electric Terrain Mod",
+		desc: `There's always Electric Terrain.`,
+	},
 };

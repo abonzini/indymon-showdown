@@ -1748,6 +1748,14 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 80,
 		},
+		onDamagingHitOrder: 2,
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(3, 10)) {
+					source.trySetStatus('par', target);
+				}
+			}
+		},
 		num: 322,
 		gen: 4,
 	},
@@ -6239,6 +6247,11 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		spritenum: 492,
 		fling: {
 			basePower: 30,
+		},
+		onAfterMove(pokemon, target, move) {
+			if (move.category === 'Status') {
+				pokemon.addVolatile('charge');
+			}
 		},
 		num: 83,
 		gen: 1,
