@@ -6249,7 +6249,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			basePower: 30,
 		},
 		onAfterMove(pokemon, target, move) {
-			if (move.category === 'Status') {
+			if (move.type !== 'Electric') {
 				pokemon.addVolatile('charge');
 			}
 		},
