@@ -3046,7 +3046,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	overcoat: {
 		onImmunity(type, pokemon) {
-			if (type === 'sandstorm' || type === 'hail' || type ==='continuoushail' || type === 'powder') return false;
+			if (type === 'sandstorm' || type === 'continuoussandstorm' || type === 'hail' || type ==='continuoushail' || type === 'powder') return false;
 		},
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
@@ -3881,7 +3881,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	sandforce: {
 		onBasePowerPriority: 21,
 		onBasePower(basePower, attacker, defender, move) {
-			if (this.field.isWeather('sandstorm')) {
+			if (this.field.isWeather('sandstorm') || this.field.isWeather('continuoussandstorm')) {
 				if (move.type === 'Rock' || move.type === 'Ground' || move.type === 'Steel') {
 					this.debug('Sand Force boost');
 					return this.chainModify([5325, 4096]);
@@ -3889,7 +3889,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			}
 		},
 		onImmunity(type, pokemon) {
-			if (type === 'sandstorm') return false;
+			if (type === 'sandstorm' || type === 'continuoussandstorm') return false;
 		},
 		flags: {},
 		name: "Sand Force",
@@ -3898,12 +3898,12 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	sandrush: {
 		onModifySpe(spe, pokemon) {
-			if (this.field.isWeather('sandstorm')) {
+			if (this.field.isWeather('sandstorm') || this.field.isWeather('continuoussandstorm')) {
 				return this.chainModify(2);
 			}
 		},
 		onImmunity(type, pokemon) {
-			if (type === 'sandstorm') return false;
+			if (type === 'sandstorm' || type === 'continuoussandstorm') return false;
 		},
 		flags: {},
 		name: "Sand Rush",
@@ -3930,12 +3930,12 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	sandveil: {
 		onImmunity(type, pokemon) {
-			if (type === 'sandstorm') return false;
+			if (type === 'sandstorm' || type === 'continuoussandstorm') return false;
 		},
 		onModifyAccuracyPriority: -1,
 		onModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
-			if (this.field.isWeather('sandstorm')) {
+			if (this.field.isWeather('sandstorm') || this.field.isWeather('continuoussandstorm')) {
 				this.debug('Sand Veil - decreasing accuracy');
 				return this.chainModify([3277, 4096]);
 			}

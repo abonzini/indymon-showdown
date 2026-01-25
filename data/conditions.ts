@@ -758,6 +758,33 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			this.add('-weather', 'none');
 		},
 	},
+	continuoussandstorm: {
+		name: 'Continuous Sandstorm',
+		effectType: 'Weather',
+		duration: 0,
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifySpDPriority: 10,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.hasType('Rock') && this.field.isWeather('continuoussandstorm')) {
+				return this.modify(spd, 1.5);
+			}
+		},
+		onFieldStart(field, source, effect) {
+			this.add('-weather', 'Sandstorm');
+		},
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
+			this.add('-weather', 'Sandstorm', '[upkeep]');
+			if (this.field.isWeather('continuoussandstorm')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			this.damage(target.baseMaxhp / 16);
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 	hail: {
 		name: 'Hail',
 		effectType: 'Weather',
@@ -847,7 +874,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 0,
 		onModifyDefPriority: 10,
 		onModifyDef(def, pokemon) {
-			if (pokemon.hasType('Ice') && this.field.isWeather('snowscape')) {
+			if (pokemon.hasType('Ice') && this.field.isWeather('continuoussnow')) {
 				return this.modify(def, 1.5);
 			}
 		},
@@ -857,7 +884,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
 			this.add('-weather', 'Snowscape', '[upkeep]');
-			if (this.field.isWeather('snowscape')) this.eachEvent('Weather');
+			if (this.field.isWeather('continuoussnow')) this.eachEvent('Weather');
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');

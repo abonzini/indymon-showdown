@@ -131,6 +131,13 @@ export class Field {
 			this.battle.singleEvent('FieldStart', psea, this.weatherState, this);
 			return true;
 		}
+		if (this.battle.ruleTable.has('continuoussandmod')) {
+			const psea = this.battle.dex.conditions.get('continuoussandstorm');
+			this.weather = psea.id;
+			this.weatherState = this.battle.initEffectState({id: psea.id});
+			this.battle.singleEvent('FieldStart', psea, this.weatherState, this);
+			return true;
+		}
 
 		this.battle.eachEvent('WeatherChange');
 		return true;
