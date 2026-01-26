@@ -828,7 +828,6 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 			if (this.field.isWeather('continuoushail')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (target.hasType('Ice')) return;
 			this.damage(target.baseMaxhp / 16);
 		},
 		onFieldEnd() {

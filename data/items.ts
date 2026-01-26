@@ -5400,7 +5400,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			basePower: 80,
 		},
 		onImmunity(type, pokemon) {
-			if (type === 'sandstorm' || type === 'hail' || type === 'powder') return false;
+			if (type === 'sandstorm' || type === 'continuoussandstorm' || type === 'hail' || type === 'continuoushail' || type === 'powder') return false;
 		},
 		onTryHit(pokemon, source, move) {
 			if (move.flags['powder'] && pokemon !== source && this.dex.getImmunity('powder', pokemon)) {
