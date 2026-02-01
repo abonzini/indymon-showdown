@@ -2273,7 +2273,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				{
 					newType = 'Ground';
 				}
-				else if (this.field.environment === 'Water')
+				else if (this.field.environment === 'water')
 				{
 					newType = 'Water';
 				}
@@ -13167,7 +13167,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				{
 					move = 'surf';
 				}
-				else if (this.field.environment === 'Water')
+				else if (this.field.environment === 'water')
 				{
 					move = 'dive';
 				}
@@ -16699,7 +16699,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 						volatileStatus: 'confusion',
 					});
 				}
-				else if (this.field.environment === 'Water')
+				else if (this.field.environment === 'water')
 				{
 					move.secondaries.push({
 						chance: 30,
