@@ -13157,7 +13157,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				}
 				else if (this.field.environment === 'desert')
 				{
-					move = 'sandtomb';
+					move = 'scorchingsands';
 				}
 				else if (this.field.environment === 'electric')
 				{
@@ -13177,7 +13177,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				}
 				else if (this.field.environment === 'sky')
 				{
-					move = 'skyattack';
+					move = 'airslash';
 				}
 				else if (this.field.environment === 'mountains')
 				{
