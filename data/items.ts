@@ -1,3 +1,5 @@
+import { Item } from '../sim/dex-items';
+
 export const Items: import('../sim/dex-items').ItemDataTable = {
 	abilityshield: {
 		name: "Ability Shield",
@@ -2103,6 +2105,20 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
+		onResidualOrder: 28,
+		onResidualSubOrder: 3,
+		onResidual(pokemon) {
+			pokemon.setStatus('brn', pokemon, null, true); // Set status, source is mon and effect no idea. True because I need to override immunities
+			pokemon.status = pokemon.battle.dex.conditions.get('brn').id;
+		},
+		onSetStatus(status, target, source, effect) {
+			if(target.status === 'brn') return false; // If burned while equipping this, it'll fail
+			return true;
+		},
+		onBasePowerPriority: 16,
+		onBasePower(basePower, user, target, move) {
+			return this.chainModify([4505, 4096]);
+		},
 		num: 82,
 		gen: 1,
 	},
@@ -3284,6 +3300,25 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
+		onDamagePriority: -40,
+		onDamage(damage, target, source, effect) {
+			if (damage >= target.hp && effect && effect.effectType === 'Move') {
+					return target.hp - 1;
+			}
+		},
+		onUpdate(pokemon) {
+			if (pokemon.hp === 1) // Means the mon was left in 1HP, usually because of my effect
+			{
+				if (this.runEvent('TryHeal', pokemon, null, this.effect, pokemon.baseMaxhp / 4) && pokemon.useItem()) {
+					this.heal(pokemon.baseMaxhp / 4);
+					pokemon.cureStatus();
+					pokemon.removeVolatile('confusion');
+					pokemon.setAbility('plantbody')
+					pokemon.setType('Grass')
+					this.add('-start', pokemon, 'typechange', 'Grass', '[from] item: Leaf Stone');
+				}
+			}
+		},
 		num: 85,
 		gen: 1,
 	},
@@ -4184,6 +4219,13 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		spritenum: 295,
 		fling: {
 			basePower: 30,
+		},
+		onBeforeMove(source, target, move) {
+			const types = this.dex.types.all().map(t => t.name); // All types plus stellar
+			types.push("Stellar");
+			const newType = this.sample(types);
+			source.teraType = newType;
+			this.actions.terastallize(source);
 		},
 		num: 81,
 		gen: 1,
@@ -5603,6 +5645,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		spritenum: 439,
 		fling: {
 			basePower: 80,
+		},
+		onResidual(pokemon) {
+			if (pokemon.activeTurns) {
+				this.boost({ accuracy: 1 });
+				this.boost({ evasion: -1 });
+			}
 		},
 		num: 107,
 		gen: 4,
