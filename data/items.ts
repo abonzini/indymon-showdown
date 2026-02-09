@@ -3302,7 +3302,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onDamagePriority: -40,
 		onDamage(damage, target, source, effect) {
-			if (damage >= target.hp && effect && effect.effectType === 'Move') {
+			if (damage >= target.hp) {
 					return target.hp - 1;
 			}
 		},
@@ -5645,12 +5645,6 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		spritenum: 439,
 		fling: {
 			basePower: 80,
-		},
-		onResidual(pokemon) {
-			if (pokemon.activeTurns) {
-				this.boost({ accuracy: 1 });
-				this.boost({ evasion: -1 });
-			}
 		},
 		num: 107,
 		gen: 4,
