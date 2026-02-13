@@ -1328,10 +1328,11 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onModifySpDPriority: 2,
 		onModifySpD(spd, pokemon) {
-			if (pokemon.hasType('Water') && pokemon.baseSpecies.nfe && pokemon.baseSpecies.prevo === '') {
+			if (pokemon.baseSpecies.name === 'Clamperl') {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Clamperl"],
 		num: 227,
 		gen: 3,
 		isNonstandard: "Past",
@@ -1344,10 +1345,11 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			if (pokemon.hasType('Water') && pokemon.baseSpecies.nfe && pokemon.baseSpecies.prevo === '') {
+			if (pokemon.baseSpecies.name === 'Clamperl') {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Clamperl"],
 		num: 226,
 		gen: 3,
 		isNonstandard: "Past",

@@ -3283,9 +3283,4 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		name: "Continuous Sand Mod",
 		desc: `There's always sandstorm. Weather can override it but then it returns to sandstorm.`,
 	},
-	environmentmod: {
-		name: 'Environment Mod',
-		desc: `Adds an extra flag to dungeon/field environment. Usage: Environment Mod = [String]`,
-		hasValue: true,
-	},
 };

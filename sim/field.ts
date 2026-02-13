@@ -19,8 +19,6 @@ export class Field {
 	terrainState: EffectState;
 	pseudoWeather: { [id: string]: EffectState };
 
-	environment: string;
-
 	constructor(battle: Battle) {
 		this.battle = battle;
 		const fieldScripts = this.battle.format.field || this.battle.dex.data.Scripts.field;
@@ -32,12 +30,6 @@ export class Field {
 		this.terrain = '';
 		this.terrainState = this.battle.initEffectState({ id: '' });
 		this.pseudoWeather = {};
-
-		this.environment = '';
-		if (this.battle.ruleTable.has('environmentmod'))
-		{
-			this.environment = this.battle.ruleTable.valueRules.get('environmentmod') || '';
-		}
 	}
 
 	toJSON(): AnyObject {

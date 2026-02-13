@@ -2244,59 +2244,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				newType = 'Fairy';
 			} else if (this.field.isTerrain('psychicterrain')) {
 				newType = 'Psychic';
-			} else if (this.field.environment !== '') { // Otherwise check for enviros
-				if (this.field.environment === 'forest')
-				{
-					newType = 'Grass';
-				}
-				else if (this.field.environment === 'eerie')
-				{
-					newType = 'Ghost';
-				}
-				else if (this.field.environment === 'pond')
-				{
-					newType = 'Water';
-				}
-				else if (this.field.environment === 'meadow')
-				{
-					newType = 'Grass';
-				}
-				else if (this.field.environment === 'desert')
-				{
-					newType = 'Ground';
-				}
-				else if (this.field.environment === 'electric')
-				{
-					newType = 'Electric';
-				}
-				else if (this.field.environment === 'beach')
-				{
-					newType = 'Ground';
-				}
-				else if (this.field.environment === 'water')
-				{
-					newType = 'Water';
-				}
-				else if (this.field.environment === 'temple')
-				{
-					newType = 'Fighting';
-				}
-				else if (this.field.environment === 'sky')
-				{
-					newType = 'Flying';
-				}
-				else if (this.field.environment === 'mountains')
-				{
-					newType = 'Ice';
-				}
-				else if (this.field.environment === 'cave')
-				{
-					newType = 'Rock';
-				}
-				else if (this.field.environment === 'volcano')
-				{
-					newType = 'Fire';
-				}
 			}
 
 			if (target.getTypes().join() === newType || !target.setType(newType)) return false;
@@ -13138,61 +13085,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			} else if (this.field.isTerrain('psychicterrain')) {
 				move = 'psychic';
 			}
-			else if (this.field.environment !== '') { // Otherwise check for enviros
-				if (this.field.environment === 'forest')
-				{
-					move = 'energyball';
-				}
-				else if (this.field.environment === 'eerie')
-				{
-					move = 'ShadowBall';
-				}
-				else if (this.field.environment === 'pond')
-				{
-					move = 'waterpulse';
-				}
-				else if (this.field.environment === 'meadow')
-				{
-					move = 'energyball';
-				}
-				else if (this.field.environment === 'desert')
-				{
-					move = 'scorchingsands';
-				}
-				else if (this.field.environment === 'electric')
-				{
-					move = 'thunderbolt';
-				}
-				else if (this.field.environment === 'beach')
-				{
-					move = 'surf';
-				}
-				else if (this.field.environment === 'water')
-				{
-					move = 'dive';
-				}
-				else if (this.field.environment === 'temple')
-				{
-					move = 'aurasphere';
-				}
-				else if (this.field.environment === 'sky')
-				{
-					move = 'airslash';
-				}
-				else if (this.field.environment === 'mountains')
-				{
-					move = 'avalanche';
-				}
-				else if (this.field.environment === 'cave')
-				{
-					move = 'rockslide';
-				}
-				else if (this.field.environment === 'volcano')
-				{
-					move = 'lavaplume';
-				}
-			}
-			
 			this.actions.useMove(move, pokemon, { target });
 			return null;
 		},
@@ -16618,7 +16510,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { protect: 1, mirror: 1, metronome: 1 },
 		onModifyMove(move, pokemon) {
-			if (this.field.isTerrain('') || this.field.environment === '') return;
+			if (this.field.isTerrain('')) return;
 			move.secondaries = [];
 			if (this.field.isTerrain('electricterrain')) {
 				move.secondaries.push({
@@ -16644,105 +16536,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 						spe: -1,
 					},
 				});
-			}
-			else if (this.field.environment !== '') { // Otherwise check for enviros
-				if (this.field.environment === 'forest')
-				{
-					move.secondaries.push({
-						chance: 30,
-						status: 'slp',
-					});
-				}
-				else if (this.field.environment === 'eerie')
-				{
-					move.secondaries.push({
-						chance: 30,
-						boosts: {
-							spd: -1,
-						},
-					});
-				}
-				else if (this.field.environment === 'pond')
-				{
-					move.secondaries.push({
-						chance: 30,
-						volatileStatus: 'confusion',
-					});
-				}
-				else if (this.field.environment === 'meadow')
-				{
-					move.secondaries.push({
-						chance: 30,
-						status: 'slp',
-					});
-				}
-				else if (this.field.environment === 'desert')
-				{
-					move.secondaries.push({
-						chance: 30,
-						boosts: {
-							def: -1,
-						},
-					});
-				}
-				else if (this.field.environment === 'electric')
-				{
-					move.secondaries.push({
-						chance: 30,
-						status: 'par',
-					});
-				}
-				else if (this.field.environment === 'beach')
-				{
-					move.secondaries.push({
-						chance: 30,
-						volatileStatus: 'confusion',
-					});
-				}
-				else if (this.field.environment === 'water')
-				{
-					move.secondaries.push({
-						chance: 30,
-						volatileStatus: 'confusion',
-					});
-				}
-				else if (this.field.environment === 'temple')
-				{
-					move.secondaries.push({
-						chance: 30,
-						volatileStatus: 'flinch',
-					});
-				}
-				else if (this.field.environment === 'sky')
-				{
-					move.secondaries.push({
-						chance: 30,
-						volatileStatus: 'flinch',
-					});
-				}
-				else if (this.field.environment === 'mountains')
-				{
-					move.secondaries.push({
-						chance: 30,
-						status: 'frz',
-					});
-				}
-				else if (this.field.environment === 'cave')
-				{
-					move.secondaries.push({
-						chance: 30,
-						boosts: {
-							def: -1,
-						},
-					});
-				}
-				else if (this.field.environment === 'volcano')
-				{
-					move.secondaries.push({
-						chance: 30,
-						status: 'brn',
-					});
-				}
 			}
 		},
 		secondary: {
