@@ -6150,6 +6150,15 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
+		onSwitchIn(pokemon) {
+			// Finds opposite mon, transforms it into sunflora, consumes item
+			const target = pokemon.side.foe.active[pokemon.side.foe.active.length - 1 - pokemon.position];
+			if (target && pokemon.useItem()) {
+				this.field.setWeather('sunnyday');
+				target.formeChange('Sunflora', this.effect, true, '1');
+				target.heal(target.baseMaxhp);
+			}
+		},
 		num: 80,
 		gen: 2,
 	},
