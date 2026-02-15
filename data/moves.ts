@@ -22169,7 +22169,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		name: "Trick Room",
 		pp: 5,
 		priority: -7,
-		flags: { mirror: 1, metronome: 1 },
+		flags: { mirror: 1 },
 		pseudoWeather: 'trickroom',
 		condition: {
 			duration: 0,
@@ -22201,10 +22201,10 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		name: "Electric Terrain",
+		name: "Continuous Electric Terrain",
 		pp: 10,
 		priority: 0,
-		flags: { nonsky: 1, metronome: 1 },
+		flags: { nonsky: 1 },
 		terrain: 'electricterrain',
 		condition: {
 			effectType: 'Terrain',
@@ -22249,5 +22249,57 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Electric",
 		zMove: { boost: { spe: 1 } },
 		contestType: "Clever",
+	},
+	continuousgrassyterrain: {
+		num: -6,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Continuous Grassy Terrain",
+		pp: 10,
+		priority: 0,
+		flags: { nonsky: 1 },
+		terrain: 'grassyterrain',
+		condition: {
+			effectType: 'Terrain',
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				const weakenedMoves = ['earthquake', 'bulldoze', 'magnitude'];
+				if (weakenedMoves.includes(move.id) && defender.isGrounded() && !defender.isSemiInvulnerable()) {
+					this.debug('move weakened by grassy terrain');
+					return this.chainModify(0.5);
+				}
+				if (move.type === 'Grass' && attacker.isGrounded()) {
+					this.debug('grassy terrain boost');
+					return this.chainModify([5325, 4096]);
+				}
+			},
+			onFieldStart(field, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Grassy Terrain', '[from] ability: ' + effect.name, `[of] ${source}`);
+				} else {
+					this.add('-fieldstart', 'move: Grassy Terrain');
+				}
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 2,
+			onResidual(pokemon) {
+				if (pokemon.isGrounded() && !pokemon.isSemiInvulnerable()) {
+					this.heal(pokemon.baseMaxhp / 16, pokemon, pokemon);
+				} else {
+					this.debug(`Pokemon semi-invuln or not grounded; Grassy Terrain skipped`);
+				}
+			},
+			onFieldResidualOrder: 27,
+			onFieldResidualSubOrder: 7,
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Grassy Terrain');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Grass",
+		zMove: { boost: { def: 1 } },
+		contestType: "Beautiful",
 	},
 };
