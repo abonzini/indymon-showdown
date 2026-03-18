@@ -1760,12 +1760,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 80,
 		},
-		onDamagingHitOrder: 2,
-		onDamagingHit(damage, target, source, move) {
-			if (this.checkMoveMakesContact(move, source, target)) {
-				if (this.randomChance(3, 10)) {
-					source.trySetStatus('par', target);
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Electric') {
+				if (!this.boost({ spe: 1 })) {
+					this.add('-immune', target, '[from] item: Electirizer');
 				}
+				return null;
 			}
 		},
 		num: 322,
