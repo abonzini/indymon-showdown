@@ -479,7 +479,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 5,
 		durationCallback(source, effect) {
 			if (source?.hasItem('damprock')) {
-				return 8;
+				return 0;
 			}
 			return 5;
 		},
@@ -608,7 +608,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 5,
 		durationCallback(source, effect) {
 			if (source?.hasItem('heatrock')) {
-				return 8;
+				return 0;
 			}
 			return 5;
 		},
@@ -726,7 +726,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 5,
 		durationCallback(source, effect) {
 			if (source?.hasItem('smoothrock')) {
-				return 8;
+				return 0;
 			}
 			return 5;
 		},
@@ -791,7 +791,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 5,
 		durationCallback(source, effect) {
 			if (source?.hasItem('icyrock')) {
-				return 8;
+				return 0;
 			}
 			return 5;
 		},
@@ -840,7 +840,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		duration: 5,
 		durationCallback(source, effect) {
 			if (source?.hasItem('icyrock')) {
-				return 8;
+				return 0;
 			}
 			return 5;
 		},
