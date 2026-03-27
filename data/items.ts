@@ -8271,5 +8271,21 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		num: -6,
 		gen: 9,
+	},
+	bosssunstone: {
+		name: "Boss Sun Stone",
+		spritenum: 480,
+		fling: {
+			basePower: 30,
+		},
+		onSwitchIn(pokemon) {
+			// Transforms mon into sunflora, consumes item
+			if (pokemon.useItem()) {
+				this.field.setWeather('sunnyday');
+				this.field.addPseudoWeather('gravity');
+			}
+		},
+		num: -7,
+		gen: 9,
 	}
 };
