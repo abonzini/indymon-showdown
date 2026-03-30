@@ -507,6 +507,11 @@ export class Pokemon {
 		if (this.set.nonVolatileInitial)
 		{
 			this.status = this.battle.dex.conditions.get(this.set.nonVolatileInitial).id;
+			if (this.set.nonVolatileInitial == 'slp')
+			{
+				this.statusState.time = 3;
+				this.statusState.startTime = 3;
+			}
 		}
 	}
 
