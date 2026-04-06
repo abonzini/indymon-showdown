@@ -346,12 +346,7 @@ export class Pokemon {
 		if (!this.set.moves?.length) {
 			throw new Error(`Set ${this.name} has no moves`);
 		}
-		if (this.set.moves.length !== this.set.movesPp.length) {
-			throw new Error(`Set ${this.name} moves/uses length mismatch`);
-		}
-		for (let i = 0; i < this.set.moves.length; i++) {
-			const moveid = this.set.moves[i];
-			const movePp = this.set.movesPp[i] || 0;
+		for (const moveid of this.set.moves) {
 			let move = this.battle.dex.moves.get(moveid);
 			if (!move.id) continue;
 			if (move.id === 'hiddenpower' && move.type !== 'Normal') {
@@ -360,11 +355,10 @@ export class Pokemon {
 			}
 			let basepp = move.noPPBoosts ? move.pp : move.pp * 8 / 5;
 			if (this.battle.gen < 3) basepp = Math.min(61, basepp);
-			const currentPP = Math.min(basepp, movePp);
 			this.baseMoveSlots.push({
 				move: move.name,
 				id: move.id,
-				pp: currentPP,
+				pp: basepp,
 				maxpp: basepp,
 				target: move.target,
 				disabled: false,

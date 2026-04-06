@@ -43,7 +43,6 @@ export interface PokemonSet {
 	 * These should always be converted to ids before use.
 	 */
 	moves: string[];
-	movesPp: number[]; // INDYMON, registers how many times a move has been used
 	/**
 	 * This can be an id, e.g. "adamant" or a full name, e.g. "Adamant".
 	 * This should always be converted to an id before use.
@@ -145,11 +144,7 @@ export const Teams = new class Teams {
 			buf += `|${this.packName(set.ability)}`;
 
 			// moves
-			buf += '|' + set.moves.map((m, i) => {
-				const name = this.packName(m);
-				const uses = set.movesPp[i] || 1000; // Default is a huge number idc, will be clamped
-				return uses ? name + '#' + uses : name;
-			}).join(',');
+			buf += '|' + set.moves.map(this.packName).join(',');
 
 			// nature
 			buf += `|${set.nature || ''}`;
@@ -272,15 +267,7 @@ export const Teams = new class Teams {
 			// moves
 			j = buf.indexOf('|', i);
 			if (j < 0) return null;
-			// new indymon way of also capturing number of uses too
-			const moveParts = buf.substring(i, j).split(',', 24);
-			set.moves = [];
-			set.movesPp = [];
-			for (const part of moveParts) {
-				const [rawName, usesStr] = part.split('#');
-				set.moves.push(this.unpackName(rawName, Dex.moves));
-				set.movesPp.push(usesStr ? parseInt(usesStr) : 1000); // Default is huge number idc will be clamped
-			}			
+			set.moves = buf.substring(i, j).split(',', 24).map(name => this.unpackName(name, Dex.moves));	
 			i = j + 1;
 
 			// nature
