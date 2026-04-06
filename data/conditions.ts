@@ -476,12 +476,12 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	raindance: {
 		name: 'RainDance',
 		effectType: 'Weather',
-		duration: 5,
+		duration: 8,
 		durationCallback(source, effect) {
 			if (source?.hasItem('damprock')) {
 				return 0;
 			}
-			return 5;
+			return 8;
 		},
 		onWeatherModifyDamage(damage, attacker, defender, move) {
 			if (defender.hasItem('utilityumbrella')) return;
@@ -605,12 +605,12 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	sunnyday: {
 		name: 'SunnyDay',
 		effectType: 'Weather',
-		duration: 5,
+		duration: 8,
 		durationCallback(source, effect) {
 			if (source?.hasItem('heatrock')) {
 				return 0;
 			}
-			return 5;
+			return 8;
 		},
 		onWeatherModifyDamage(damage, attacker, defender, move) {
 			if (move.id === 'hydrosteam' && !attacker.hasItem('utilityumbrella')) {
@@ -723,12 +723,12 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	sandstorm: {
 		name: 'Sandstorm',
 		effectType: 'Weather',
-		duration: 5,
+		duration: 8,
 		durationCallback(source, effect) {
 			if (source?.hasItem('smoothrock')) {
 				return 0;
 			}
-			return 5;
+			return 8;
 		},
 		// This should be applied directly to the stat before any of the other modifiers are chained
 		// So we give it increased priority.
@@ -788,12 +788,12 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	hail: {
 		name: 'Hail',
 		effectType: 'Weather',
-		duration: 5,
+		duration: 8,
 		durationCallback(source, effect) {
 			if (source?.hasItem('icyrock')) {
 				return 0;
 			}
-			return 5;
+			return 8;
 		},
 		onFieldStart(field, source, effect) {
 			if (effect?.effectType === 'Ability') {
@@ -837,12 +837,12 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	snowscape: {
 		name: 'Snowscape',
 		effectType: 'Weather',
-		duration: 5,
+		duration: 8,
 		durationCallback(source, effect) {
 			if (source?.hasItem('icyrock')) {
 				return 0;
 			}
-			return 5;
+			return 8;
 		},
 		onModifyDefPriority: 10,
 		onModifyDef(def, pokemon) {

@@ -4669,12 +4669,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		terrain: 'electricterrain',
 		condition: {
 			effectType: 'Terrain',
-			duration: 5,
+			duration: 8,
 			durationCallback(source, effect) {
 				if (source?.hasItem('terrainextender')) {
 					return 0;
 				}
-				return 5;
+				return 8;
 			},
 			onSetStatus(status, target, source, effect) {
 				if (status.id === 'slp' && target.isGrounded() && !target.isSemiInvulnerable()) {
@@ -7959,12 +7959,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		terrain: 'grassyterrain',
 		condition: {
 			effectType: 'Terrain',
-			duration: 5,
+			duration: 8,
 			durationCallback(source, effect) {
 				if (source?.hasItem('terrainextender')) {
 					return 0;
 				}
-				return 5;
+				return 8;
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
@@ -12610,12 +12610,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		terrain: 'mistyterrain',
 		condition: {
 			effectType: 'Terrain',
-			duration: 5,
+			duration: 8,
 			durationCallback(source, effect) {
 				if (source?.hasItem('terrainextender')) {
 					return 0;
 				}
-				return 5;
+				return 8;
 			},
 			onSetStatus(status, target, source, effect) {
 				if (!target.isGrounded() || target.isSemiInvulnerable()) return;
@@ -14635,12 +14635,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		terrain: 'psychicterrain',
 		condition: {
 			effectType: 'Terrain',
-			duration: 5,
+			duration: 8,
 			durationCallback(source, effect) {
 				if (source?.hasItem('terrainextender')) {
 					return 0;
 				}
-				return 5;
+				return 8;
 			},
 			onTryHitPriority: 4,
 			onTryHit(target, source, effect) {
