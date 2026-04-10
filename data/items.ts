@@ -1762,10 +1762,13 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Electric') {
-				if (!this.boost({ spe: 1 })) {
-					this.add('-immune', target, '[from] item: Electirizer');
+				if(target.useItem())
+				{
+					if (!this.boost({ spe: 1 })) {
+						this.add('-immune', target, '[from] item: Electirizer');
+					}
+					return null;
 				}
-				return null;
 			}
 		},
 		num: 322,
@@ -3725,7 +3728,10 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
 				if (this.randomChance(3, 10)) {
-					source.trySetStatus('brn', target);
+					if(target.useItem())
+					{
+						source.trySetStatus('brn', target);
+					}
 				}
 			}
 		},
