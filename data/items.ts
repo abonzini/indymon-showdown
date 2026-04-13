@@ -4285,12 +4285,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
-		onBeforeMove(source, target, move) {
+		onBeforeTurn(pokemon) {
 			const types = this.dex.types.all().map(t => t.name); // All types plus stellar
 			types.push("Stellar");
 			const newType = this.sample(types);
-			source.teraType = newType;
-			this.actions.terastallize(source);
+			pokemon.teraType = newType;
+			this.actions.terastallize(pokemon);
 		},
 		num: 81,
 		gen: 1,
