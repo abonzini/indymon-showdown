@@ -2236,9 +2236,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { snatch: 1, metronome: 1 },
 		onHit(target) {
 			let newType = 'Normal';
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain')) {
 				newType = 'Electric';
-			} else if (this.field.isTerrain('grassyterrain')) {
+			} else if (this.field.isTerrain('grassyterrain') || this.field.isTerrain('continuousgrassyterrain')) {
 				newType = 'Grass';
 			} else if (this.field.isTerrain('mistyterrain')) {
 				newType = 'Fairy';
@@ -6030,7 +6030,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { protect: 1, reflectable: 1, heal: 1, allyanim: 1, metronome: 1 },
 		onHit(target, source) {
 			let success = false;
-			if (this.field.isTerrain('grassyterrain')) {
+			if (this.field.isTerrain('grassyterrain') || this.field.isTerrain('continuousgrassyterrain')) {
 				success = !!this.heal(this.modify(target.baseMaxhp, 0.667));
 			} else {
 				success = !!this.heal(Math.ceil(target.baseMaxhp * 0.5));
@@ -7938,7 +7938,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
 		onModifyPriority(priority, source, target, move) {
-			if (this.field.isTerrain('grassyterrain') && source.isGrounded()) {
+			if ((this.field.isTerrain('grassyterrain')||this.field.isTerrain('continuousgrassyterrain')) && source.isGrounded()) {
 				return priority + 1;
 			}
 		},
@@ -13077,9 +13077,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1 },
 		onTryHit(target, pokemon) {
 			let move = 'triattack';
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain')||this.field.isTerrain('continuouselectricterrain')) {
 				move = 'thunderbolt';
-			} else if (this.field.isTerrain('grassyterrain')) {
+			} else if (this.field.isTerrain('grassyterrain')||this.field.isTerrain('continuousgrassyterrain')) {
 				move = 'energyball';
 			} else if (this.field.isTerrain('mistyterrain')) {
 				move = 'moonblast';
@@ -14560,7 +14560,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1 },
 		secondary: null,
 		onBasePower(basePower, source) {
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain')) {
 				this.debug('psyblade electric terrain boost');
 				return this.chainModify(1.5);
 			}
@@ -15715,7 +15715,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		accuracy: 100,
 		basePower: 70,
 		basePowerCallback(source, target, move) {
-			if (this.field.isTerrain('electricterrain') && target.isGrounded()) {
+			if ((this.field.isTerrain('electricterrain')||this.field.isTerrain('continuouselectricterrain')) && target.isGrounded()) {
 				if (!source.isAlly(target)) this.hint(`${move.name}'s BP doubled on grounded target.`);
 				return move.basePower * 2;
 			}
@@ -16509,12 +16509,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		onModifyMove(move, pokemon) {
 			if (this.field.isTerrain('')) return;
 			move.secondaries = [];
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain')||this.field.isTerrain('continuouselectricterrain')) {
 				move.secondaries.push({
 					chance: 30,
 					status: 'par',
 				});
-			} else if (this.field.isTerrain('grassyterrain')) {
+			} else if (this.field.isTerrain('grassyterrain')||this.field.isTerrain('continuousgrassyterrain')) {
 				move.secondaries.push({
 					chance: 30,
 					status: 'slp',
@@ -20011,9 +20011,11 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			if (!pokemon.isGrounded()) return;
 			switch (this.field.terrain) {
 			case 'electricterrain':
+			case 'continuouselectricterrain':
 				move.type = 'Electric';
 				break;
 			case 'grassyterrain':
+			case 'continuousgrassyterrain':
 				move.type = 'Grass';
 				break;
 			case 'mistyterrain':

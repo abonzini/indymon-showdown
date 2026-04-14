@@ -1645,7 +1645,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	grasspelt: {
 		onModifyDefPriority: 6,
 		onModifyDef(pokemon) {
-			if (this.field.isTerrain('grassyterrain')) return this.chainModify(1.5);
+			if (this.field.isTerrain('grassyterrain') || this.field.isTerrain('continuousgrassyterrain')) return this.chainModify(1.5);
 		},
 		flags: { breakable: 1 },
 		name: "Grass Pelt",
@@ -1735,7 +1735,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		},
 		onModifySpAPriority: 5,
 		onModifySpA(atk, attacker, defender, move) {
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain')) {
 				this.debug('Hadron Engine boost');
 				return this.chainModify([5461, 4096]);
 			}
@@ -2520,9 +2520,11 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			let types;
 			switch (this.field.terrain) {
 			case 'electricterrain':
+			case 'continuouselectricterrain':
 				types = ['Electric'];
 				break;
 			case 'grassyterrain':
+			case 'continuousgrassyterrain':
 				types = ['Grass'];
 				break;
 			case 'mistyterrain':
@@ -3572,7 +3574,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			this.singleEvent('TerrainChange', this.effect, this.effectState, pokemon);
 		},
 		onTerrainChange(pokemon) {
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain')) {
 				pokemon.addVolatile('quarkdrive');
 			} else if (!pokemon.volatiles['quarkdrive']?.fromBooster) {
 				pokemon.removeVolatile('quarkdrive');
@@ -4663,7 +4665,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 	},
 	surgesurfer: {
 		onModifySpe(spe) {
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain')) {
 				return this.chainModify(2);
 			}
 		},
