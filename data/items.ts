@@ -8251,31 +8251,13 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		num: -3,
 		gen: 9,
 	},
-	blankdisk: {
-		name: "Blank Disk",
-		spritenum: 734,
-		fling: {
-			basePower: 150,
-		},
-		num: -4,
-		gen: 9,
-	},
-	spentmint: {
-		name: "Spent Mint",
-		spritenum: 535,
-		fling: {
-			basePower: 80,
-		},
-		num: -5,
-		gen: 9,
-	},
 	amuletcoin: {
 		name: "Amulet Coin",
 		spritenum: 747,
 		fling: {
 			basePower: 80,
 		},
-		num: -6,
+		num: -4,
 		gen: 9,
 	},
 	bosssunstone: {
@@ -8291,7 +8273,16 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 				this.field.addPseudoWeather('gravity');
 			}
 		},
-		num: -7,
+		num: -5,
 		gen: 9,
-	}
+	},
+	blankplate: {
+		name: "Blank Plate",
+		spritenum: 747,
+		fling: {
+			basePower: 80,
+		},
+		num: -4,
+		gen: 9,
+	},
 };
