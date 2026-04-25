@@ -2240,7 +2240,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				newType = 'Electric';
 			} else if (this.field.isTerrain('grassyterrain') || this.field.isTerrain('continuousgrassyterrain')) {
 				newType = 'Grass';
-			} else if (this.field.isTerrain('mistyterrain')) {
+			} else if (this.field.isTerrain('mistyterrain') || this.field.isTerrain('continuousmistyterrain')) {
 				newType = 'Fairy';
 			} else if (this.field.isTerrain('psychicterrain')) {
 				newType = 'Psychic';
@@ -12589,7 +12589,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { protect: 1, mirror: 1, metronome: 1 },
 		selfdestruct: "always",
 		onBasePower(basePower, source) {
-			if (this.field.isTerrain('mistyterrain') && source.isGrounded()) {
+			if ((this.field.isTerrain('mistyterrain') || this.field.isTerrain('continuousmistyterrain')) && source.isGrounded()) {
 				this.debug('misty terrain boost');
 				return this.chainModify(1.5);
 			}
@@ -13081,7 +13081,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				move = 'thunderbolt';
 			} else if (this.field.isTerrain('grassyterrain')||this.field.isTerrain('continuousgrassyterrain')) {
 				move = 'energyball';
-			} else if (this.field.isTerrain('mistyterrain')) {
+			} else if (this.field.isTerrain('mistyterrain') || this.field.isTerrain('continuousmistyterrain')) {
 				move = 'moonblast';
 			} else if (this.field.isTerrain('psychicterrain')) {
 				move = 'psychic';
@@ -16519,7 +16519,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 					chance: 30,
 					status: 'slp',
 				});
-			} else if (this.field.isTerrain('mistyterrain')) {
+			} else if (this.field.isTerrain('mistyterrain')||this.field.isTerrain('continuousmistyterrain')) {
 				move.secondaries.push({
 					chance: 30,
 					boosts: {
@@ -20019,6 +20019,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				move.type = 'Grass';
 				break;
 			case 'mistyterrain':
+			case 'continuousmistyterrain':
 				move.type = 'Fairy';
 				break;
 			case 'psychicterrain':
@@ -22272,6 +22273,59 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "all",
 		type: "Grass",
 		zMove: { boost: { def: 1 } },
+		contestType: "Beautiful",
+	},
+	continuousmistyterrain: {
+		num: -7,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Continuous Misty Terrain",
+		pp: 10,
+		priority: 0,
+		flags: { nonsky: 1},
+		terrain: 'mistyterrain',
+		condition: {
+			effectType: 'Terrain',
+			duration: 0,
+			onSetStatus(status, target, source, effect) {
+				if (!target.isGrounded() || target.isSemiInvulnerable()) return;
+				if (effect && ((effect as Move).status || effect.id === 'yawn')) {
+					this.add('-activate', target, 'move: Misty Terrain');
+				}
+				return false;
+			},
+			onTryAddVolatile(status, target, source, effect) {
+				if (!target.isGrounded() || target.isSemiInvulnerable()) return;
+				if (status.id === 'confusion') {
+					if (effect.effectType === 'Move' && !effect.secondaries) this.add('-activate', target, 'move: Misty Terrain');
+					return null;
+				}
+			},
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Dragon' && defender.isGrounded() && !defender.isSemiInvulnerable()) {
+					this.debug('misty terrain weaken');
+					return this.chainModify(0.5);
+				}
+			},
+			onFieldStart(field, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Misty Terrain', '[from] ability: ' + effect.name, `[of] ${source}`);
+				} else {
+					this.add('-fieldstart', 'move: Misty Terrain');
+				}
+			},
+			onFieldResidualOrder: 27,
+			onFieldResidualSubOrder: 7,
+			onFieldEnd() {
+				this.add('-fieldend', 'Misty Terrain');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Fairy",
+		zMove: { boost: { spd: 1 } },
 		contestType: "Beautiful",
 	},
 };

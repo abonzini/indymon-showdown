@@ -2528,6 +2528,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 				types = ['Grass'];
 				break;
 			case 'mistyterrain':
+			case 'continuousmistyterrain':
 				types = ['Fairy'];
 				break;
 			case 'psychicterrain':

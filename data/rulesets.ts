@@ -3277,4 +3277,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 		name: "Continuous Grassy Terrain Mod",
 		desc: `There's always Grassy Terrain.`,
 	},
+	continuousmistyterrainmod: {
+		effectType: 'Rule',
+		name: "Continuous Misty Terrain Mod",
+		desc: `There's always Misty Terrain.`,
+	},
 };

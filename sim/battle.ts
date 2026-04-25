@@ -2707,6 +2707,10 @@ export class Battle {
 			{
 				this.field.setTerrain('continuousgrassyterrain');
 			}
+			if (this.ruleTable.has('continuousmistyterrainmod'))
+			{
+				this.field.setTerrain('continuousmistyterrain');
+			}
 
 			// Change Zacian/Zamazenta into their Crowned formes
 			for (const pokemon of this.getAllPokemon()) {
