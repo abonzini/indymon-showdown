@@ -1812,12 +1812,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onSwitchInPriority: -1,
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('electricterrain')) {
+			if (!pokemon.ignoringItem() && (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain'))) {
 				pokemon.useItem();
 			}
 		},
 		onTerrainChange(pokemon) {
-			if (this.field.isTerrain('electricterrain')) {
+			if (this.field.isTerrain('electricterrain') || this.field.isTerrain('continuouselectricterrain')) {
 				pokemon.useItem();
 			}
 		},
@@ -2622,12 +2622,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onSwitchInPriority: -1,
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('grassyterrain')) {
+			if (!pokemon.ignoringItem() && (this.field.isTerrain('grassyterrain')||this.field.isTerrain('continuousgrassyterrain'))) {
 				pokemon.useItem();
 			}
 		},
 		onTerrainChange(pokemon) {
-			if (this.field.isTerrain('grassyterrain')) {
+			if (this.field.isTerrain('grassyterrain')||this.field.isTerrain('continuousgrassyterrain')) {
 				pokemon.useItem();
 			}
 		},
@@ -4257,12 +4257,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onSwitchInPriority: -1,
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('mistyterrain')) {
+			if (!pokemon.ignoringItem() && (this.field.isTerrain('mistyterrain')||this.field.isTerrain('continuousmistyterrain'))) {
 				pokemon.useItem();
 			}
 		},
 		onTerrainChange(pokemon) {
-			if (this.field.isTerrain('mistyterrain')) {
+			if (this.field.isTerrain('mistyterrain')||this.field.isTerrain('continuousmistyterrain')) {
 				pokemon.useItem();
 			}
 		},
@@ -5374,13 +5374,13 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onSwitchInPriority: -1,
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.getPseudoWeather('trickroom')) {
+			if (!pokemon.ignoringItem() && (this.field.getPseudoWeather('trickroom') || this.field.getPseudoWeather('continuoustrickroom'))) {
 				pokemon.useItem();
 			}
 		},
 		onAnyPseudoWeatherChange() {
 			const pokemon = this.effectState.target;
-			if (this.field.getPseudoWeather('trickroom')) {
+			if (this.field.getPseudoWeather('trickroom') || this.field.getPseudoWeather('continuoustrickroom')) {
 				pokemon.useItem(pokemon);
 			}
 		},
