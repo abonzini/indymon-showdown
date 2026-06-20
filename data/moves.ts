@@ -863,7 +863,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		flags: { snatch: 1, metronome: 1 },
 		sideCondition: 'auroraveil',
 		onTry() {
-			return this.field.isWeather(['continuoushail', 'hail', 'snowscape', 'continuoussnow']);
+			return this.field.isWeather(['Continuous Hail', 'hail', 'snowscape', 'Continuous Snow']);
 		},
 		condition: {
 			duration: 5,

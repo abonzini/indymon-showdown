@@ -868,7 +868,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 		},
 	},
 	continuoussnow: {
-		name: 'Constinuous Snow',
+		name: 'Continuous Snow',
 		effectType: 'Weather',
 		duration: 0,
 		onModifyDefPriority: 10,
